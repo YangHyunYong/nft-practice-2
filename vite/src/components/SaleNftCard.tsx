@@ -21,8 +21,9 @@ interface SaleNftCardProps {
   mintContract: Contract | null;
   saleContract: Contract | null;
   nftMetadataArray: NftMetadata[];
-  setNftMetadataArray: Dispatch<SetStateAction<NftMetadata[]>>;
   signer: JsonRpcSigner | null;
+  getNftMetadata: () => Promise<void>;
+  getOnSaleTokens: () => Promise<void>;
 }
 
 const SaleNftCard: FC<SaleNftCardProps> = ({
@@ -30,9 +31,9 @@ const SaleNftCard: FC<SaleNftCardProps> = ({
   tokenId,
   mintContract,
   saleContract,
-  nftMetadataArray,
-  setNftMetadataArray,
   signer,
+  getNftMetadata,
+  getOnSaleTokens,
 }) => {
   const [currentPrice, setCurrentPrice] = useState<bigint>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -68,13 +69,8 @@ const SaleNftCard: FC<SaleNftCardProps> = ({
 
       await response.wait();
 
-      const temp = nftMetadataArray.filter((v) => {
-        if (v.name !== nftMetadata.name) {
-          return v;
-        }
-      });
-
-      setNftMetadataArray(temp);
+      await getOnSaleTokens();
+      await getNftMetadata();
 
       setIsLoading(false);
     } catch (error) {

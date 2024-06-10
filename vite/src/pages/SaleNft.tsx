@@ -77,8 +77,9 @@ const SaleNft: FC = () => {
               mintContract={mintContract}
               saleContract={saleContract}
               nftMetadataArray={nftMetadataArray}
-              setNftMetadataArray={setNftMetadataArray}
               signer={signer}
+              getOnSaleTokens={getOnSaleTokens}
+              getNftMetadata={getNftMetadata}
             />
           ))}
         </Grid>

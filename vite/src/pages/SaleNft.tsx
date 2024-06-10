@@ -3,7 +3,6 @@ import { FC, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "../components/Layout";
 import axios from "axios";
-import NftCard from "../components/NftCard";
 import SaleNftCard from "../components/SaleNftCard";
 
 const SaleNft: FC = () => {
